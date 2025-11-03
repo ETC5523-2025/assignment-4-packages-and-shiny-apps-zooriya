@@ -1,0 +1,30 @@
+# macOS system files
+.DS_Store
+*/.DS_Store
+
+# R-related files
+.Rhistory
+.RData
+.Ruserdata
+.Rproj.user/
+
+# Temporary or build files
+*.Rproj
+*.log
+*.tar.gz
+*.Rcheck/
+*.swp
+
+# Raw ERA5 data files
+bushfirerisk/data-raw/*.nc
+bushfirerisk/data-raw/*.csv
+bushfirerisk/data-raw/*.txt
+
+# pkgdown website build
+docs/
+_site/
+
+# Shiny app cache
+bushfirerisk/inst/app/.Rproj.user/
+bushfirerisk/inst/app/.Rhistory
+bushfirerisk/inst/app/.RData
