@@ -1,0 +1,106 @@
+---
+title: "Exploring bushfire climate drivers with bushfirerisk"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Exploring bushfire climate drivers with bushfirerisk}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+library(bushfirerisk)
+library(ggplot2)
+knitr::opts_chunk$set(message=FALSE, warning=FALSE)
+```
+
+# Introduction
+
+The `bushfirerisk` package provides a cleaned monthly climate dataset (`bushfire_real`) and simple plotting tools to explore environmental drivers of Australian bushfire risk.
+
+The focus is on broad-scale drivers such as temperature, wind, and dryness (low rainfall), rather than the fire behaviour in specific fire events.
+
+This vignette: explains what is in `bushfire_real`, shows how to load and visualise it using `plot_fwi()`, and describes how these variables relate to bushfire danger.
+
+# Dataset overview
+
+The dataset `bushfire_real` is included with the package. It contains monthly averages over southeast Australia (approximately 144°E–155°E, 29°S–40°S) from January 1979 to December 2020.
+
+It has the following variables:
+
+-   `month`: Month of observation (date-time, first day of month).
+-   `temp_c`: 2m air temperature in °C (higher temperature → higher fire danger).
+-   `wind_ms`: 10m wind speed in m/s (stronger wind → faster fire spread).
+-   `dryness_index`: Mean total precipitation from ERA5, in metres. Lower values mean drier conditions.
+
+These are broad climate drivers of fire weather. They are simplified inputs to the Fire Weather Index framework, but this dataset does not calculate a complete FWI score.
+
+# Loading the data
+
+After you load the package, you can access the dataset directly:
+
+```{r}
+library(bushfirerisk)
+
+# load the data
+data(bushfire_real)
+
+head(bushfire_real)
+
+# basic summary
+summary(bushfire_real)
+```
+
+# Visualising long-term trends
+
+The package includes a helper plotting function, `plot_fwi()`, which draws a monthly time series for any one of the key variables.
+
+To look at temperature through time:
+
+```{r}
+plot_fwi(bushfire_real, var = "temp_c")
+```
+
+To look at wind speed:
+
+```{r}
+plot_fwi(bushfire_real, var = "wind_ms")
+```
+
+To look at dryness:
+
+```{r}
+plot_fwi(bushfire_real, var = "dryness_index")
+```
+
+# Interpreting plots
+
+-   A long-term upward trend in `temp_c` suggests warmer background
+
+-   conditions that can elevate bushfire risk.
+
+-   Periods of higher `wind_ms` indicate conditions that favour faster,\
+    more intense fire spread.
+
+-   Periods where `dryness_index` is very low indicate drier months (less rain), which supports fuel drying.
+
+These ingredients — heat, wind, and dryness — are known to contribute to catastrophic fire weather in southeast Australia.
+
+# Limitations
+
+-   The dataset is spatially averaged over a large region. It is NOT location-specific.
+
+-   Humidity and fuel moisture indices are not included in this version.
+
+-   `plot_fwi()` is a visual aid tool; it is not a predictive fire danger model.
+
+# Summary
+
+In summary:
+
+-   `bushfire_real` gives a 40+ year record (1979–2020) of temperature, wind, and rainfall-derived dryness in southeast Australia.
+
+-   `plot_fwi()` makes it easy to visualise how each driver changes over time.
+
+-   These variables are core components of how bushfire danger is assessed in practice.
+
+This package is for teaching and data exploration in ETC5523. It is simple, clear, and easy to reproduce.

@@ -1,0 +1,46 @@
+#' bushfire_real: Monthly mean ERA5 climate drivers for bushfire risk
+#'
+#' @description 
+#' Monthly regional averages of key meteorological drivers linked to 
+#' bushfire risk across southeast Australia (approx. 144°E–155°E, 
+#' 29°S–40°S), for the period 1979–2020. 
+#' 
+#' The dataset includes air temperature, wind speed, and a simple 
+#' dryness indicator derived from total precipitation. These variables 
+#' represent core inputs commonly used to assess fire weather danger.
+#'
+#' @format A tibble with 504 rows and 4 variables:
+#' \describe{
+#'   \item{month}{Month of observation (`POSIXct`), from Jan 1979 to Dec 2020.}
+#'   \item{temp_c}{Monthly mean 2 m air temperature (°C). 
+#'   Higher values are associated with higher bushfire risk.}
+#'   \item{wind_ms}{Monthly mean 10 m wind speed (m/s). 
+#'   Stronger winds favour faster fire spread and higher fire intensity.}
+#'   \item{dryness_index}{Monthly mean ERA5 total precipitation (`tp`, m). 
+#'   Lower values indicate drier conditions and lower moisture availability. 
+#'   This is intended as a relative dryness indicator, not an exact rainfall total.}
+#' }
+#'
+#' @source 
+#' ERA5 reanalysis data from the Copernicus Climate Data Store.
+#'
+#' @details 
+#' - Region: Southeast Australia (~144°E–155°E, 29°S–40°S)  
+#' - Period: 1979–2020 (504 monthly records)  
+#' - Variables taken from ERA5: 10 m wind (u10, v10), 2 m temperature (t2m),
+#'   and total precipitation (tp).  
+#' - Purpose: ETC5523 Assignment 4 Educational Dataset.
+#'
+#' @references
+#' van Oldenborgh, G. J., Krikken, F., Lewis, S., Leach, N. J., Lehner, F.,
+#' Saunders, K. R., van Weele, M., Haustein, K., Li, S., Wallom, D.,
+#' and Otto, F. E. L. (2021).
+#' "Attribution of the Australian bushfire risk to anthropogenic climate change."
+#' Natural Hazards and Earth System Sciences, 21(7), 941–960.
+#'
+#' @examples
+#' data(bushfire_real)
+#' summary(bushfire_real)
+#' plot(bushfire_real$month, bushfire_real$temp_c, type = "l",
+#'      ylab = "Temperature (°C)", xlab = "Year")
+"bushfire_real"
